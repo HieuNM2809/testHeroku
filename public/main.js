@@ -35,7 +35,7 @@ function playStream(idVideoTag, stream ,autoPlay = false) {
 
 let peer = new Peer({
   host: '/',
-  port: 3000,
+  // port: 3000,
   path: '/peerjs/myapp'
 });
 peer.on('open', (id) => {
