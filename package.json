@@ -1,19 +1,18 @@
 {
-    "name": "coolnodeapp",
-    "version": "1.0.0",
-    "description": "node app ",
-    "main": "app.js",
-    "scripts": {
-    "start": "node app.js"
+  "name": "socket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js",
+    "start": "node index.js"
   },
-    "repository": {
-    "type": "git",
-    "url": ""
-  },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-    "url": ""
-  },
-    "homepage": ""
+  "author": "HM",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16",
+    "socket.io": "^4.5.1"
   }
+}
