@@ -1,0 +1,38 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A cool thing made with Glitch">
+
+    <title>Welcome to Glitch!</title>
+
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <!-- import libraries -->
+    <script src="/lib/peerjs.js"></script>
+    
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/main.js" type="module"></script>
+  </head>
+  <body>
+    <h1>Video Me</h1>
+    <video class="me-video" autoplay></video>
+    <h1>Video Remote</h1>
+    <video class="remote-video" autoplay></video>
+    <input type="text" id="connect-to-peer" />
+    <button onclick="connectToPeer()">
+      Connect
+    </button>
+    
+    <div class="messages">
+      
+    </div>
+  </body>
+</html>

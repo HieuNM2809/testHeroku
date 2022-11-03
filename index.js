@@ -1,64 +1,29 @@
-const express = require('express');
-const { Server } = require("socket.io");
+
+const express = require("express");
+
+const { ExpressPeerServer } = require("peer");
+
 const app = express();
-const http = require('http');
-const server = http.createServer(app);
-// const io = new Server(server);
 
-const io  = require('socket.io')(server, {
-//  path: '/socket/laravel/socket.io',
-  cors: {
-      origin: "*",
-      methods: ["GET", "POST"]
-  }
+// make all the files in 'public' available
+// https://expressjs.com/en/starter/static-files.html
+app.use(express.static("public"));
+
+// https://expressjs.com/en/starter/basic-routing.html
+app.get("/", (request, response) => {
+    response.sendFile(__dirname + "/views/index.html");
 });
 
-
-// return view 
-app.get('/', (req, res) => {
-   res.sendFile(__dirname + '/pages/index.html');
-});
-
-var socketID = '';
-// kết nối 
-io.on('connection', (socket) => {
-   
-  //user kết nối
-  console.log('a user connected: ' + socket.id);
-
-  socketID =  socket.id;
-  console.log(socketID);
-
-  // chat message
-  socket.on('client-gui-tin-nhan', (val) => {
-    console.log('message: ' + val);
-    //1. gửi toàn serve
-    io.sockets.emit('server-gui-tin-nhan',{ 'tong':val });  // gửi message đến mn
-   
-    //2. Gửi lại chính mình 
-    //socket.emit('server-gui-tin-nhan', "Send: "+ msg);  // gửi message đến mn
-   
-    //3. Gửi toàn server trừ mình 
-    //socket.broadcast.emit('server-gui-tin-nhan', "Send: "+ msg);  // gửi message đến mn
-   
-    // gửi đến 1 người
-    //io.to(socketID).emit('server-gui-tin-nhan', 'Send by: ' +socket.id + ' =>' + msg);
-  });
-
-
-  // ngắt kết nối
-  socket.on('disconnect', function () {
-     console.log('a user disconnect: ' + socket.id);
-  });
-});
-
+// listen for requests :)
 const port = process.env.PORT || 3000;
-server.listen(port, () => {
-  console.log('listening on *:' + port);
+const listener = app.listen(port, () => {
+    console.log("Your app is listening on port " + listener.address().port);
 });
 
+// peerjs server
+const peerServer = ExpressPeerServer(listener, {
+    debug: true,
+    path: '/myapp'
+});
 
-// ==========================================
-// LINK THAM KHẢO 
-// https://socket.io/docs/v3/emit-cheatsheet/
-// ==========================================
+app.use('/peerjs', peerServer);
